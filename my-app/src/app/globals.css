@@ -1,0 +1,24 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+#root {
+    --cor-texto-botoes: #ffffff;
+    --cor-botoes: #FD1645;
+    --cor-primaria: #F1F1F1;
+    --cor-secundaria: #000034;
+    --cor-terciaria: #FD1645;
+    --cor-hover-main: #9c1833;
+    --cor-hover-cabecalho: #9c1833;
+
+    --font-titulo: "Poppins", sans-serif;
+    --font-texto: "Montserrat", sans-serif;
+    --font-texto-botao: "Jost", sans-serif;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}

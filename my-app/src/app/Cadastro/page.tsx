@@ -1,8 +1,10 @@
-// src/pages/Cadastro.tsx
-import Link from 'next/link';
-import styled from 'styled-components';
+"use client";
 
-// Estilos
+import Link from 'next/link';
+import { useEffect } from 'react';
+import styled from 'styled-components';
+import styles from './Cadastro.module.css'; // Importando o CSS
+
 const Main = styled.main`
   display: flex;
   align-items: center;
@@ -79,7 +81,7 @@ const InputWrap = styled.div`
   }
 `;
 
-const SubmitButton = styled(Link)`
+const SubmitButton = styled.button`
   display: inline-block;
   text-align: center;
   width: 100%;
@@ -90,16 +92,78 @@ const SubmitButton = styled(Link)`
   font-weight: bold;
   border-radius: 5px;
   text-decoration: none;
+  cursor: pointer;
   &:hover {
     background-color: #9c1833;
   }
 `;
 
 export default function Cadastro() {
+    useEffect(() => {
+        const inputs = document.querySelectorAll(".input-field");
+        const toggle_btn = document.querySelectorAll(".toggle");
+        const main = document.querySelector("main");
+        const bullets = document.querySelectorAll(".bullets span");
+        const images = document.querySelectorAll(".image");
+
+        inputs.forEach((inp) => {
+            inp.addEventListener("focus", () => {
+                inp.classList.add("active");
+            });
+            inp.addEventListener("blur", () => {
+                if (inp.value !== "") return;
+                inp.classList.remove("active");
+            });
+        });
+
+        toggle_btn.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                main.classList.toggle("sign-up-mode");
+            });
+        });
+
+        function moveSlider() {
+            let index = this.dataset.value;
+            let currentImage = document.querySelector(`.img-${index}`);
+            images.forEach((img) => img.classList.remove("show"));
+            currentImage.classList.add("show");
+
+            const textSlider = document.querySelector(".text-group");
+            textSlider.style.transform = `translateY(${-(index - 1) * 2.2}rem)`;
+
+            bullets.forEach((bull) => bull.classList.remove("active"));
+            this.classList.add("active");
+        }
+
+        bullets.forEach((bullet) => {
+            bullet.addEventListener("click", moveSlider);
+        });
+
+        return () => {
+            inputs.forEach((inp) => {
+                inp.removeEventListener("focus", () => {
+                    inp.classList.add("active");
+                });
+                inp.removeEventListener("blur", () => {
+                    if (inp.value !== "") return;
+                    inp.classList.remove("active");
+                });
+            });
+            toggle_btn.forEach((btn) => {
+                btn.removeEventListener("click", () => {
+                    main.classList.toggle("sign-up-mode");
+                });
+            });
+            bullets.forEach((bullet) => {
+                bullet.removeEventListener("click", moveSlider);
+            });
+        };
+    }, []);
+
     return (
         <Main>
-            <Box>
-                <InnerBox>
+            <Box className={styles.box}>
+                <InnerBox className={styles.innerBox}>
                     <FormWrap>
                         <form action="cadastro.html" autoComplete="off" className="sign-in-form">
                             <Logo>
@@ -112,36 +176,23 @@ export default function Cadastro() {
                             <Heading>
                                 <h2>Bem-vindo de volta!</h2>
                                 <h6>Não registrado ainda?</h6>
-                                <a href="#" className="toggle">Registrar-se</a>
+                                <Link href="#" className="toggle">Registrar-se</Link>
                             </Heading>
 
                             <div className="actual-form">
                                 <InputWrap>
                                     <label>Nome</label>
-                                    <input
-                                        type="text"
-                                        minLength={4}
-                                        className="input-field"
-                                        autoComplete="off"
-                                        required
-                                    />
+                                    <input type="text" minLength={4} className="input-field" autoComplete="off" required />
                                 </InputWrap>
 
                                 <InputWrap>
                                     <label>Senha</label>
-                                    <input
-                                        type="password"
-                                        minLength={4}
-                                        className="input-field"
-                                        autoComplete="off"
-                                        required
-                                    />
+                                    <input type="password" minLength={4} className="input-field" autoComplete="off" required />
                                 </InputWrap>
 
-                                <SubmitButton to="/">Sign In</SubmitButton>
+                                <SubmitButton>Sign In</SubmitButton>
                                 <p className="text">
-                                    Esqueceu sua senha e informações de login?
-                                    <a href="#">Obtenha ajuda!</a>
+                                    Esqueceu sua senha e informações de login? <Link href="#">Obtenha ajuda!</Link>
                                 </p>
                             </div>
                         </form>
@@ -157,53 +208,49 @@ export default function Cadastro() {
                             <Heading>
                                 <h2>Vamos lá!</h2>
                                 <h6>Já possui uma conta?</h6>
-                                <a href="#" className="toggle">Entrar</a>
+                                <Link href="#" className="toggle">Entrar</Link>
                             </Heading>
 
                             <div className="actual-form">
                                 <InputWrap>
                                     <label>Nome</label>
-                                    <input
-                                        type="text"
-                                        minLength={4}
-                                        className="input-field"
-                                        autoComplete="off"
-                                        required
-                                    />
+                                    <input type="text" minLength={4} className="input-field" autoComplete="off" required />
                                 </InputWrap>
 
                                 <InputWrap>
                                     <label>Email</label>
-                                    <input
-                                        type="email"
-                                        className="input-field"
-                                        autoComplete="off"
-                                        required
-                                    />
+                                    <input type="email" className="input-field" autoComplete="off" required />
                                 </InputWrap>
 
                                 <InputWrap>
                                     <label>Senha</label>
-                                    <input
-                                        type="password"
-                                        minLength={4}
-                                        className="input-field"
-                                        autoComplete="off"
-                                        required
-                                    />
+                                    <input type="password" minLength={4} className="input-field" autoComplete="off" required />
                                 </InputWrap>
 
-                                <SubmitButton to="/index">Sign Up</SubmitButton>
+                                <SubmitButton>Sign Up</SubmitButton>
                                 <p className="text">
-                                    Ao me registrar, concordo com os <a href="#">Termos de serviço</a> e
-                                    <a href="#">Política de privacidade</a>.
+                                    Ao me registrar, concordo com os <Link href="#">Termos de serviço</Link> e <Link href="#">Política de privacidade</Link>.
                                 </p>
                             </div>
                         </form>
                     </FormWrap>
 
                     <div className="carousel">
-                        {/* Inserir imagens e textos do carrossel aqui */}
+                        <div className="text-slider">
+                            <div className="text-group">
+                                <h2>Acompanhe a vida útil de seu veículo</h2>
+                                <h2>Obtenha assistência automotiva e convide pessoas para o 4wheels!</h2>
+                            </div>
+                        </div>
+
+                        <div className="bullets">
+                            <span className="active" data-value="1"></span>
+                            <span data-value="2"></span>
+                            <span data-value="3"></span>
+                        </div>
+                        <img src="/img/image1.jpeg" className="image img-1 show" alt="" />
+                        <img src="/img/image2.jpeg" className="image img-2" alt="" />
+                        <img src="/img/image3.jpeg" className="image img-3" alt="" />
                     </div>
                 </InnerBox>
             </Box>

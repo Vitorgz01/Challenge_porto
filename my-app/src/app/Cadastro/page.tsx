@@ -1,259 +1,547 @@
 "use client";
 
-import Link from 'next/link';
-import { useEffect } from 'react';
-import styled from 'styled-components';
-import styles from './Cadastro.module.css'; // Importando o CSS
+import { useState, useRef, useEffect } from "react";
 
-const Main = styled.main`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: #f1f1f1;
-`;
+export default function CadastroPage() {
+  const [isSignUpMode, setIsSignUpMode] = useState(false);
+  const [activeBullet, setActiveBullet] = useState(1);
+  const inputRefs = useRef([]);
+  const textSliderRef = useRef();
 
-const Box = styled.div`
-  width: 90%;
-  max-width: 800px;
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-`;
+  const handleFocus = (index) => {
+    inputRefs.current[index].classList.add("active");
+  };
 
-const InnerBox = styled.div`
-  display: flex;
-`;
+  const handleBlur = (index) => {
+    if (inputRefs.current[index].value === "") {
+      inputRefs.current[index].classList.remove("active");
+    }
+  };
 
-const FormWrap = styled.div`
-  flex: 1;
-  padding: 2rem;
-`;
+  const moveSlider = (index) => {
+    setActiveBullet(index);
+    textSliderRef.current.style.transform = `translateY(${
+      -(index - 1) * 2.2
+    }rem)`;
+  };
 
-const Logo = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  img {
-    width: 80px;
-    height: auto;
-  }
-  h4 {
-    margin-left: 10px;
-    font-size: 1.5rem;
-    color: #fd1645;
-  }
-`;
+  useEffect(() => {
+    const interval = setInterval(() => {
+      moveSlider((activeBullet % 3) + 1);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [activeBullet]);
 
-const Heading = styled.div`
-  margin: 1.5rem 0;
-  h2 {
-    font-size: 1.8rem;
-    color: #333;
-  }
-  h6 {
-    font-size: 1rem;
-    color: #666;
-    margin-top: 0.5rem;
-  }
-  .toggle {
-    color: #fd1645;
-    text-decoration: underline;
-    cursor: pointer;
-  }
-`;
+  return (
+    <main className={isSignUpMode ? "sign-up-mode" : ""}>
+      <div className="box">
+        <div className="inner-box">
+          <div className="forms-wrap">
+            {/* Sign-in Form */}
+            <form className="sign-in-form">
+              <div className="logo">
+                <img
+                  src="../public/images/assets/logo-4wheels.png"
+                  alt="4wheels"
+                />
+                <h4>
+                  <span>4</span>wheels
+                </h4>
+              </div>
+              <div className="heading">
+                <h2>Bem-vindo de volta!</h2>
+                <h6>Não registrado ainda?</h6>
+                <a onClick={() => setIsSignUpMode(true)} className="toggle">
+                  Registrar-se
+                </a>
+              </div>
+              <div className="actual-form">
+                <div className="input-wrap">
+                  <input
+                    type="text"
+                    ref={(el) => (inputRefs.current[0] = el)}
+                    className="input-field"
+                    onFocus={() => handleFocus(0)}
+                    onBlur={() => handleBlur(0)}
+                    required
+                  />
+                  <label>Nome</label>
+                </div>
+                <div className="input-wrap">
+                  <input
+                    type="password"
+                    ref={(el) => (inputRefs.current[1] = el)}
+                    className="input-field"
+                    onFocus={() => handleFocus(1)}
+                    onBlur={() => handleBlur(1)}
+                    required
+                  />
+                  <label>Senha</label>
+                </div>
+                <a href="#" className="botao">
+                  Sign In
+                </a>
+              </div>
+            </form>
 
-const InputWrap = styled.div`
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-  label {
-    font-size: 0.9rem;
-    color: #555;
-  }
-  .input-field {
-    padding: 0.8rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-  }
-`;
+            {/* Sign-up Form */}
+            <form className="sign-up-form">
+              <div className="logo">
+                <img src="/images/logo4wheels.jpeg" alt="4wheels" />
+                <h4>
+                  <span>4</span>wheels
+                </h4>
+              </div>
+              <div className="heading">
+                <h2>Vamos lá!</h2>
+                <h6>Já possui uma conta?</h6>
+                <a onClick={() => setIsSignUpMode(false)} className="toggle">
+                  Entrar
+                </a>
+              </div>
+              <div className="actual-form">
+                <div className="input-wrap">
+                  <input
+                    type="text"
+                    ref={(el) => (inputRefs.current[2] = el)}
+                    className="input-field"
+                    onFocus={() => handleFocus(2)}
+                    onBlur={() => handleBlur(2)}
+                    required
+                  />
+                  <label>Nome</label>
+                </div>
+                <div className="input-wrap">
+                  <input
+                    type="email"
+                    ref={(el) => (inputRefs.current[3] = el)}
+                    className="input-field"
+                    onFocus={() => handleFocus(3)}
+                    onBlur={() => handleBlur(3)}
+                    required
+                  />
+                  <label>Email</label>
+                </div>
+                <div className="input-wrap">
+                  <input
+                    type="password"
+                    ref={(el) => (inputRefs.current[4] = el)}
+                    className="input-field"
+                    onFocus={() => handleFocus(4)}
+                    onBlur={() => handleBlur(4)}
+                    required
+                  />
+                  <label>Senha</label>
+                </div>
+                <a href="#" className="botao">
+                  Sign Up
+                </a>
+              </div>
+            </form>
+          </div>
 
-const SubmitButton = styled.button`
-  display: inline-block;
-  text-align: center;
-  width: 100%;
-  padding: 0.8rem;
-  margin-top: 1rem;
-  background-color: #fd1645;
-  color: #fff;
-  font-weight: bold;
-  border-radius: 5px;
-  text-decoration: none;
-  cursor: pointer;
-  &:hover {
-    background-color: #9c1833;
-  }
-`;
+          {/* Carousel */}
+          <div className="carousel">
+            <div className="images-wrapper">
+              <img
+                src="/images/img-1.png"
+                className={`image img-1 ${activeBullet === 1 ? "show" : ""}`}
+                alt="Imagem 1"
+              />
+              <img
+                src="/images/img-2.png"
+                className={`image img-2 ${activeBullet === 2 ? "show" : ""}`}
+                alt="Imagem 2"
+              />
+              <img
+                src="/images/img-3.png"
+                className={`image img-3 ${activeBullet === 3 ? "show" : ""}`}
+                alt="Imagem 3"
+              />
+            </div>
+            <div className="text-slider">
+              <div ref={textSliderRef} className="text-wrap">
+                <div className="text-group">
+                  <h2>Acompanhe a vida útil de seu veículo</h2>
+                  <h2>Obtenha assistência automotiva</h2>
+                  <h2>Convide amigos para o 4wheels!</h2>
+                </div>
+              </div>
+              <div className="bullets">
+                {[1, 2, 3].map((i) => (
+                  <span
+                    key={i}
+                    onClick={() => moveSlider(i)}
+                    className={i === activeBullet ? "active" : ""}
+                  ></span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-export default function Cadastro() {
-    useEffect(() => {
-        const inputs = document.querySelectorAll(".input-field");
-        const toggle_btn = document.querySelectorAll(".toggle");
-        const main = document.querySelector("main");
-        const bullets = document.querySelectorAll(".bullets span");
-        const images = document.querySelectorAll(".image");
+      <style jsx>{`
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
 
-        inputs.forEach((inp) => {
-            inp.addEventListener("focus", () => {
-                inp.classList.add("active");
-            });
-            inp.addEventListener("blur", () => {
-                if (inp.value !== "") return;
-                inp.classList.remove("active");
-            });
-        });
-
-        toggle_btn.forEach((btn) => {
-            btn.addEventListener("click", () => {
-                main.classList.toggle("sign-up-mode");
-            });
-        });
-
-        function moveSlider() {
-            let index = this.dataset.value;
-            let currentImage = document.querySelector(`.img-${index}`);
-            images.forEach((img) => img.classList.remove("show"));
-            currentImage.classList.add("show");
-
-            const textSlider = document.querySelector(".text-group");
-            textSlider.style.transform = `translateY(${-(index - 1) * 2.2}rem)`;
-
-            bullets.forEach((bull) => bull.classList.remove("active"));
-            this.classList.add("active");
+        /* General reset and font styles */
+        * {
+          padding: 0;
+          margin: 0;
+          box-sizing: border-box;
         }
 
-        bullets.forEach((bullet) => {
-            bullet.addEventListener("click", moveSlider);
-        });
+        body,
+        input {
+          font-family: "Poppins", sans-serif;
+        }
 
-        return () => {
-            inputs.forEach((inp) => {
-                inp.removeEventListener("focus", () => {
-                    inp.classList.add("active");
-                });
-                inp.removeEventListener("blur", () => {
-                    if (inp.value !== "") return;
-                    inp.classList.remove("active");
-                });
-            });
-            toggle_btn.forEach((btn) => {
-                btn.removeEventListener("click", () => {
-                    main.classList.toggle("sign-up-mode");
-                });
-            });
-            bullets.forEach((bullet) => {
-                bullet.removeEventListener("click", moveSlider);
-            });
-        };
-    }, []);
+        /* Main layout */
+        main {
+          width: 100%;
+          min-height: 100vh;
+          overflow: hidden;
+          background-color: #010035;
+          padding: 2rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
 
-    return (
-        <Main>
-            <Box className={styles.box}>
-                <InnerBox className={styles.innerBox}>
-                    <FormWrap>
-                        <form action="cadastro.html" autoComplete="off" className="sign-in-form">
-                            <Logo>
-                                <img src="/img/logo4wheels.jpeg" alt="4wheels" />
-                                <h4>
-                                    <span>4</span>wheels
-                                </h4>
-                            </Logo>
+        .box {
+          position: relative;
+          width: 100%;
+          max-width: 1020px;
+          height: 640px;
+          background-color: #fff;
+          border-radius: 3.3rem;
+          box-shadow: 0 60px 40px -30px rgba(255, 0, 0, 0.203);
+        }
 
-                            <Heading>
-                                <h2>Bem-vindo de volta!</h2>
-                                <h6>Não registrado ainda?</h6>
-                                <Link href="#" className="toggle">Registrar-se</Link>
-                            </Heading>
+        .inner-box {
+          position: absolute;
+          width: calc(100% - 4.1rem);
+          height: calc(100% - 4.1rem);
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
 
-                            <div className="actual-form">
-                                <InputWrap>
-                                    <label>Nome</label>
-                                    <input type="text" minLength={4} className="input-field" autoComplete="off" required />
-                                </InputWrap>
+        .forms-wrap {
+          position: absolute;
+          height: 100%;
+          width: 45%;
+          top: 0;
+          left: 0;
+          display: grid;
+          grid-template-columns: 1fr;
+          grid-template-rows: 1fr;
+          transition: 0.8s ease-in-out;
+        }
 
-                                <InputWrap>
-                                    <label>Senha</label>
-                                    <input type="password" minLength={4} className="input-field" autoComplete="off" required />
-                                </InputWrap>
+        /* Form styling */
+        form {
+          max-width: 260px;
+          width: 100%;
+          margin: 0 auto;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+          grid-column: 1 / 2;
+          grid-row: 1 / 2;
+          transition: opacity 0.02s 0.4s;
+        }
 
-                                <SubmitButton>Sign In</SubmitButton>
-                                <p className="text">
-                                    Esqueceu sua senha e informações de login? <Link href="#">Obtenha ajuda!</Link>
-                                </p>
-                            </div>
-                        </form>
+        .sign-up-form {
+          opacity: 0;
+          pointer-events: none;
+        }
 
-                        <form action="cadastro.html" autoComplete="off" className="sign-up-form">
-                            <Logo>
-                                <img src="/img/logo4wheels.jpeg" alt="4wheels" />
-                                <h4>
-                                    <span>4</span>wheels
-                                </h4>
-                            </Logo>
+        /* Logo styling */
+        .logo {
+          display: flex;
+          align-items: center;
+        }
 
-                            <Heading>
-                                <h2>Vamos lá!</h2>
-                                <h6>Já possui uma conta?</h6>
-                                <Link href="#" className="toggle">Entrar</Link>
-                            </Heading>
+        .logo img {
+          width: 50px;
+          margin-right: 0.1rem;
+        }
 
-                            <div className="actual-form">
-                                <InputWrap>
-                                    <label>Nome</label>
-                                    <input type="text" minLength={4} className="input-field" autoComplete="off" required />
-                                </InputWrap>
+        .logo h4 {
+          font-size: 1.1rem;
+          margin-top: -5px;
+          letter-spacing: -0.5px;
+          color: #ff0000;
+        }
 
-                                <InputWrap>
-                                    <label>Email</label>
-                                    <input type="email" className="input-field" autoComplete="off" required />
-                                </InputWrap>
+        .logo h4 span {
+          color: #010035;
+        }
 
-                                <InputWrap>
-                                    <label>Senha</label>
-                                    <input type="password" minLength={4} className="input-field" autoComplete="off" required />
-                                </InputWrap>
+        /* Headings */
+        .heading h2 {
+          font-size: 2.1rem;
+          font-weight: 600;
+          padding-bottom: 2%;
+          color: #000;
+        }
 
-                                <SubmitButton>Sign Up</SubmitButton>
-                                <p className="text">
-                                    Ao me registrar, concordo com os <Link href="#">Termos de serviço</Link> e <Link href="#">Política de privacidade</Link>.
-                                </p>
-                            </div>
-                        </form>
-                    </FormWrap>
+        .heading h6 {
+          color: #bababa;
+          font-weight: 400;
+          font-size: 0.75rem;
+          display: inline;
+        }
 
-                    <div className="carousel">
-                        <div className="text-slider">
-                            <div className="text-group">
-                                <h2>Acompanhe a vida útil de seu veículo</h2>
-                                <h2>Obtenha assistência automotiva e convide pessoas para o 4wheels!</h2>
-                            </div>
-                        </div>
+        .toggle {
+          color: #000;
+          text-decoration: none;
+          font-size: 0.75rem;
+          font-weight: 500;
+          transition: 0.3s;
+        }
 
-                        <div className="bullets">
-                            <span className="active" data-value="1"></span>
-                            <span data-value="2"></span>
-                            <span data-value="3"></span>
-                        </div>
-                        <img src="/img/image1.jpeg" className="image img-1 show" alt="" />
-                        <img src="/img/image2.jpeg" className="image img-2" alt="" />
-                        <img src="/img/image3.jpeg" className="image img-3" alt="" />
-                    </div>
-                </InnerBox>
-            </Box>
-        </Main>
-    );
+        .toggle:hover {
+          color: #ff0000;
+        }
+
+        /* Input styling */
+        .input-wrap {
+          position: relative;
+          height: 37px;
+          margin-bottom: 2rem;
+        }
+
+        .input-field {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background: none;
+          border: none;
+          outline: none;
+          border-bottom: 1px solid #bbb;
+          padding: 0;
+          font-size: 0.95rem;
+          color: #151111;
+          transition: 0.4s;
+        }
+
+        label {
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          font-size: 0.95rem;
+          color: #bbb;
+          pointer-events: none;
+          transition: 0.4s;
+        }
+
+        .input-field.active {
+          border-bottom-color: #151111;
+        }
+
+        .input-field.active + label {
+          font-size: 0.75rem;
+          top: -2px;
+        }
+
+        /* Button styling */
+        .botao {
+          display: inline-block;
+          width: 100%;
+          height: 43px;
+          background-color: #010035;
+          color: #fff;
+          cursor: pointer;
+          border-radius: 0.8rem;
+          font-size: 0.8rem;
+          margin-bottom: 2rem;
+          transition: 0.3s;
+          text-align: center;
+          padding-top: 0.7rem;
+          text-decoration: none;
+          -webkit-transition-duration: 0.3s;
+          -webkit-transition-property: box-shadow, transform;
+          transition-property: box-shadow, transform;
+        }
+
+        .botao:hover {
+          background-color: #ff0000;
+          box-shadow: 0 0 20px rgba(175, 175, 175, 0.5);
+          -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+        }
+
+        /* Carousel styling */
+        .carousel {
+          position: absolute;
+          height: 100%;
+          width: 55%;
+          left: 45%;
+          top: 0;
+          background-color: #010035;
+          border-radius: 2rem;
+          display: grid;
+          grid-template-rows: auto 1fr;
+          padding-bottom: 2rem;
+          overflow: hidden;
+          transition: 0.8s ease-in-out;
+        }
+
+        .images-wrapper {
+          display: grid;
+          grid-template-columns: 1fr;
+          grid-template-rows: 1fr;
+        }
+
+        .image {
+          width: 100%;
+          grid-column: 1/2;
+          grid-row: 1/2;
+          opacity: 0;
+          transition: opacity 0.3s, transform 0.5s;
+        }
+
+        .image.show {
+          opacity: 1;
+          transform: none;
+        }
+
+        /* Text slider styling */
+        .text-slider {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+        }
+
+        .text-wrap {
+          max-height: 2.2rem;
+          overflow: hidden;
+          margin-bottom: 2.5rem;
+        }
+
+        .text-group {
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+          transform: translateY(0);
+          transition: 0.5s;
+        }
+
+        .text-group h2 {
+          line-height: 2.2rem;
+          font-weight: 600;
+          font-size: 1.6rem;
+          color: #fff;
+        }
+
+        .bullets {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .bullets span {
+          display: block;
+          width: 0.5rem;
+          height: 0.5rem;
+          background-color: #aaa;
+          margin: 0 0.25rem;
+          border-radius: 50%;
+          cursor: pointer;
+          transition: 0.3s;
+        }
+
+        .bullets span.active {
+          width: 1.1rem;
+          background-color: #ff0000;
+          border-radius: 1rem;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 850px) {
+          .box {
+            height: auto;
+            max-width: 550px;
+            overflow: hidden;
+          }
+
+          .inner-box {
+            position: static;
+            transform: none;
+            width: revert;
+            height: revert;
+            padding: 2rem;
+          }
+
+          .forms-wrap {
+            position: revert;
+            width: 100%;
+            height: auto;
+          }
+
+          form {
+            max-width: revert;
+            padding: 1.5rem 2.5rem 2rem;
+            transition: transform 0.8s ease-in-out, opacity 0.45s linear;
+          }
+
+          .heading {
+            margin: 2rem 0;
+          }
+
+          .carousel {
+            position: revert;
+            height: auto;
+            width: 100%;
+            padding: 3rem 2rem;
+            display: flex;
+          }
+
+          .images-wrapper {
+            display: none;
+          }
+
+          .text-slider {
+            width: 100%;
+          }
+        }
+
+        @media (max-width: 530px) {
+          main {
+            padding: 1rem;
+          }
+
+          .box {
+            border-radius: 2rem;
+          }
+
+          .inner-box {
+            padding: 1rem;
+          }
+
+          .carousel {
+            padding: 1.5rem 1rem;
+            border-radius: 1.6rem;
+          }
+
+          .text-wrap {
+            margin-bottom: 1rem;
+          }
+
+          .text-group h2 {
+            font-size: 1.2rem;
+          }
+
+          form {
+            padding: 1rem 2rem 1.5rem;
+          }
+        }
+      `}</style>
+    </main>
+  );
 }

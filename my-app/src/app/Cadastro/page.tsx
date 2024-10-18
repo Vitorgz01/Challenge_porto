@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function CadastroPage() {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
@@ -20,9 +20,8 @@ export default function CadastroPage() {
 
   const moveSlider = (index) => {
     setActiveBullet(index);
-    textSliderRef.current.style.transform = `translateY(${
-      -(index - 1) * 2.2
-    }rem)`;
+    textSliderRef.current.style.transform = `translateY(${-(index - 1) * 2.2
+      }rem)`;
   };
 
   useEffect(() => {
@@ -78,7 +77,7 @@ export default function CadastroPage() {
                   />
                   <label>Senha</label>
                 </div>
-                <a href="#" className="botao">
+                <a href="../Contato/" className="botao">
                   Sign In
                 </a>
               </div>
@@ -87,7 +86,7 @@ export default function CadastroPage() {
             {/* Sign-up Form */}
             <form className="sign-up-form">
               <div className="logo">
-                <img src="/images/logo4wheels.jpeg" alt="4wheels" />
+                <img src="../public/images/assets/logo-4wheels.png" alt="4wheels" />
                 <h4>
                   <span>4</span>wheels
                 </h4>
@@ -395,6 +394,7 @@ export default function CadastroPage() {
           display: grid;
           grid-template-columns: 1fr;
           grid-template-rows: 1fr;
+          visibility: hidden;
         }
 
         .image {

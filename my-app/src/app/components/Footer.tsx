@@ -1,5 +1,5 @@
 
-// src/components/Footer.tsx
+"use client";
 import React from 'react';
 import styled from 'styled-components';
 
@@ -36,14 +36,14 @@ const CopyRightText = styled.p`
 `;
 
 const Footer: React.FC = () => {
-    return (
-        <FooterWrapper>
-            <FooterLink href="/sobre">Sobre</FooterLink>
-            <FooterLink href="/integrantes">Integrantes</FooterLink>
-            <FooterLink href="/privacidade">Privacidade</FooterLink>
-            <CopyRightText>© 2023 4Wheels. Todos os direitos reservados.</CopyRightText>
-        </FooterWrapper>
-    );
+  return (
+    <FooterWrapper>
+      <FooterLink href="/sobre">Sobre</FooterLink>
+      <FooterLink href="/integrantes">Integrantes</FooterLink>
+      <FooterLink href="/privacidade">Privacidade</FooterLink>
+      <CopyRightText>© 2023 4Wheels. Todos os direitos reservados.</CopyRightText>
+    </FooterWrapper>
+  );
 };
 
 export default Footer;

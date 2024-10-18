@@ -1,4 +1,4 @@
-// src/app/home/page.tsx
+"use client";
 import styled from 'styled-components';
 
 const Main = styled.main`
@@ -90,27 +90,27 @@ const PaymentLink = styled.a`
   }
 `;
 
-export default function Home() {
-    return (
-        <Main>
-            <Title>Como podemos te ajudar?</Title>
-            <SectionWrapper>
-                <Column>
-                    <Text>Fale com o nosso chat para conseguir ajuda.</Text>
-                    <ChatButton>Chat</ChatButton>
-                </Column>
+export default function Suporte() {
+  return (
+    <Main>
+      <Title>Como podemos te ajudar?</Title>
+      <SectionWrapper>
+        <Column>
+          <Text>Fale com o nosso chat para conseguir ajuda.</Text>
+          <ChatButton>Chat</ChatButton>
+        </Column>
 
-                <Column>
-                    <Text>Temos algumas opções prontas para ser mais rápido sua procura.</Text>
-                    <OptionsButton>Opções</OptionsButton>
-                </Column>
+        <Column>
+          <Text>Temos algumas opções prontas para ser mais rápido sua procura.</Text>
+          <OptionsButton>Opções</OptionsButton>
+        </Column>
 
-                <Column>
-                    <Text>Mecânicos com notas e preços:</Text>
-                    <TableButton>Tabela com os mecânicos</TableButton>
-                </Column>
-            </SectionWrapper>
-            <PaymentLink href="#">Ir para o pagamento</PaymentLink>
-        </Main>
-    );
+        <Column>
+          <Text>Mecânicos com notas e preços:</Text>
+          <TableButton>Tabela com os mecânicos</TableButton>
+        </Column>
+      </SectionWrapper>
+      <PaymentLink href="#">Ir para o pagamento</PaymentLink>
+    </Main>
+  );
 }

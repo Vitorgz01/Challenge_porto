@@ -76,19 +76,19 @@ const Header: React.FC = () => {
   return (
     <HeaderWrapper>
       <LogoTitle>
-        <Logo src="/images/assets/logo-4wheels-vermelho-branco-160px.png" alt="Logo 4Wheels" />
-        <Link href="/cadastro" passHref>
+        <Logo src="../public/images/assets/logo-4wheels-vermelho-branco-160px.png" alt="Logo 4Wheels" />
+        <Link href="../Cadastro" passHref>
           <ButtonEnter>Entrar</ButtonEnter>
         </Link>
       </LogoTitle>
       <Nav>
-        <Link href="/servicos" passHref>
+        <Link href="../Servicos" passHref>
           <NavLink>Serviços</NavLink>
         </Link>
-        <Link href="/" passHref>
+        <Link href="../Suporte" passHref>
           <NavLink>Suporte</NavLink>
         </Link>
-        <Link href="/contato" passHref>
+        <Link href="../Contato" passHref>
           <NavLink>Contato</NavLink>
         </Link>
       </Nav>

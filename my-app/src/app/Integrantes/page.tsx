@@ -1,9 +1,9 @@
-// src/app/integrantes/page.tsx
+"use client";
 import Image from 'next/image';
 import styled from 'styled-components';
-import vitor from '/public/fotovitor.png';
-import gabriel from '/public/gabriel-177x250.jpeg';
-import victor from '/public/victor.jpg';
+import vitor from '../public/images/assets/fotovitor.png';
+import gabriel from '../public/images/assets/gabriel-177x250.jpeg';
+import victor from '../public/images/assets/victor.jpg';
 
 const Main = styled.main`
   padding: 2rem;
@@ -67,51 +67,51 @@ const RepositoryLink = styled.p`
 `;
 
 export default function Integrantes() {
-    return (
-        <Main>
-            <Title>Integrantes:</Title>
+  return (
+    <Main>
+      <Title>Integrantes:</Title>
 
-            <MembersContainer>
-                <Member>
-                    <MemberImage src={vitor} alt="Foto do Vitor" width={90} height={90} />
-                    <MemberInfo>
-                        <InfoText>Nome: Vitor de Oliveira Ginza</InfoText>
-                        <InfoText>RM: 554849</InfoText>
-                        <InfoText>Turma: 1TDSPL - 2024</InfoText>
-                        <InfoText>
-                            Github: <GithubLink href="https://github.com/Vitorgz01" target="_blank" rel="noopener noreferrer">github.com/Vitorgz01</GithubLink>
-                        </InfoText>
-                    </MemberInfo>
-                </Member>
+      <MembersContainer>
+        <Member>
+          <MemberImage src={vitor} alt="Foto do Vitor" width={90} height={90} />
+          <MemberInfo>
+            <InfoText>Nome: Vitor de Oliveira Ginza</InfoText>
+            <InfoText>RM: 554849</InfoText>
+            <InfoText>Turma: 1TDSPL - 2024</InfoText>
+            <InfoText>
+              Github: <GithubLink href="https://github.com/Vitorgz01" target="_blank" rel="noopener noreferrer">github.com/Vitorgz01</GithubLink>
+            </InfoText>
+          </MemberInfo>
+        </Member>
 
-                <Member>
-                    <MemberImage src={victor} alt="Foto do Victor" width={90} height={90} />
-                    <MemberInfo>
-                        <InfoText>Nome: Victor Hugo Carvalho Pereira</InfoText>
-                        <InfoText>RM: 558550</InfoText>
-                        <InfoText>Turma: 1TDSPL - 2024</InfoText>
-                        <InfoText>
-                            Github: <GithubLink href="https://github.com/VictorHugo55" target="_blank" rel="noopener noreferrer">github.com/VictorHugo55</GithubLink>
-                        </InfoText>
-                    </MemberInfo>
-                </Member>
+        <Member>
+          <MemberImage src={victor} alt="Foto do Victor" width={90} height={90} />
+          <MemberInfo>
+            <InfoText>Nome: Victor Hugo Carvalho Pereira</InfoText>
+            <InfoText>RM: 558550</InfoText>
+            <InfoText>Turma: 1TDSPL - 2024</InfoText>
+            <InfoText>
+              Github: <GithubLink href="https://github.com/VictorHugo55" target="_blank" rel="noopener noreferrer">github.com/VictorHugo55</GithubLink>
+            </InfoText>
+          </MemberInfo>
+        </Member>
 
-                <Member>
-                    <MemberImage src={gabriel} alt="Foto do Gabriel" width={90} height={90} />
-                    <MemberInfo>
-                        <InfoText>Nome: Gabriel Gomes</InfoText>
-                        <InfoText>RM: 555427</InfoText>
-                        <InfoText>Turma: 1TDSPL - 2024</InfoText>
-                        <InfoText>
-                            Github: <GithubLink href="https://github.com/GomesMancera" target="_blank" rel="noopener noreferrer">github.com/GomesMancera</GithubLink>
-                        </InfoText>
-                    </MemberInfo>
-                </Member>
-            </MembersContainer>
+        <Member>
+          <MemberImage src={gabriel} alt="Foto do Gabriel" width={90} height={90} />
+          <MemberInfo>
+            <InfoText>Nome: Gabriel Gomes</InfoText>
+            <InfoText>RM: 555427</InfoText>
+            <InfoText>Turma: 1TDSPL - 2024</InfoText>
+            <InfoText>
+              Github: <GithubLink href="https://github.com/GomesMancera" target="_blank" rel="noopener noreferrer">github.com/GomesMancera</GithubLink>
+            </InfoText>
+          </MemberInfo>
+        </Member>
+      </MembersContainer>
 
-            <RepositoryLink>
-                Link do Repositório: <GithubLink href="https://github.com/Vitorgz01/Challenge_porto" target="_blank" rel="noopener noreferrer">https://github.com/Vitorgz01/Challenge_porto</GithubLink>
-            </RepositoryLink>
-        </Main>
-    );
+      <RepositoryLink>
+        Link do Repositório: <GithubLink href="https://github.com/Vitorgz01/Challenge_porto" target="_blank" rel="noopener noreferrer">https://github.com/Vitorgz01/Challenge_porto</GithubLink>
+      </RepositoryLink>
+    </Main>
+  );
 }

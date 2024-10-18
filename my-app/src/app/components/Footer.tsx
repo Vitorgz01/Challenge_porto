@@ -38,9 +38,9 @@ const CopyRightText = styled.p`
 const Footer: React.FC = () => {
   return (
     <FooterWrapper>
-      <FooterLink href="/sobre">Sobre</FooterLink>
-      <FooterLink href="/integrantes">Integrantes</FooterLink>
-      <FooterLink href="/privacidade">Privacidade</FooterLink>
+      <FooterLink href="../Sobre">Sobre</FooterLink>
+      <FooterLink href="../Integrantes">Integrantes</FooterLink>
+      <FooterLink href="../Privacidade">Privacidade</FooterLink>
       <CopyRightText>© 2023 4Wheels. Todos os direitos reservados.</CopyRightText>
     </FooterWrapper>
   );

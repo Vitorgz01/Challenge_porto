@@ -1,15 +1,22 @@
-/* globals.css */
+:root {
+  --cor-texto-botoes: #ffffff;
+  --cor-botoes: #FD1645;
+  --cor-primaria: #F1F1F1;
+  --cor-secundaria: #000034;
+  --cor-terciaria: #FD1645;
+  --cor-hover-main: #9c1833;
+  --cor-hover-cabecalho: #9c1833;
 
-/* General global reset */
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  --font-titulo: "Poppins", sans-serif;
+  --font-texto: "Montserrat", sans-serif;
+  --font-texto-botao: "Jost", sans-serif;
 }
 
+/* Adicione estilos globais adicionais, se necessário */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
+  font-family: var(--font-texto);
+  background-color: var(--cor-primaria);
+  color: var(--cor-secundaria);
+  margin: 0;
+  padding: 0;
 }

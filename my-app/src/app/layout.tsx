@@ -3,10 +3,12 @@
 import localFont from "next/font/local";
 import Head from 'next/head'; // Import Head for SEO
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react"; // Adicionar hooks para mudança dinâmica
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import "./globals.css";
 
+// Fontes personalizadas
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -25,10 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        <title>Your App Title</title>
-        <meta name="description" content="Your app description here." />
-      </Head>
+      {/* Título será gerenciado dinamicamente no ClientLayout */}
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ClientLayout>{children}</ClientLayout>
       </body>
@@ -38,12 +37,36 @@ export default function RootLayout({
 
 const ClientLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
-  const noHeaderFooterRoutes = ['/Cadastro']; // Remover a barra final
+  const [pageTitle, setPageTitle] = useState('Suporte - 4Wheels'); // Título padrão
+  const noHeaderFooterRoutes = ['/Cadastro']; // Rotas onde não queremos Header e Footer
 
   const showHeaderFooter = !noHeaderFooterRoutes.includes(pathname);
 
+  useEffect(() => {
+
+    switch (pathname) {
+      case '../app/Servicos':
+        setPageTitle('Serviços - 4Wheels');
+        break;
+      case '../app/Contato':
+        setPageTitle('Contato - 4Wheels');
+        break;
+      case '../app/Cadastro':
+        setPageTitle('Cadastro - 4Wheels');
+        break;
+      default:
+        setPageTitle('Suporte - 4Wheels');
+        break;
+    }
+  }, [pathname]); // Atualiza o título quando o pathname mudar
+
   return (
     <>
+      <Head>
+        <title>{pageTitle}</title>
+        <meta name="description" content="Descrição dinâmica da página." />
+      </Head>
+
       {showHeaderFooter && <Header />}
       {children}
       {showHeaderFooter && <Footer />}

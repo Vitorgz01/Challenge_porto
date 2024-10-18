@@ -1,20 +1,34 @@
 "use client";
 
 import Link from 'next/link';
-import React from 'react';
+import { usePathname } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+// Wrapper geral do cabeçalho
 const HeaderWrapper = styled.header`
-  background-color: var(--cor-secundaria);
+  background-color: #000034;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
 `;
 
+// Parte central para o título e navegação
+const CenterWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+`;
+
+// Logo e título
 const LogoTitle = styled.div`
   display: flex;
   align-items: center;
 `;
 
 const Logo = styled.img`
-  margin: 36px 0px 0px 77px;
   width: 6em;
 `;
 
@@ -22,18 +36,18 @@ const Title = styled.h1`
   font-family: var(--font-titulo);
   font-size: 3rem;
   color: var(--cor-primaria);
-  margin-left: 37.5%;
+  margin-bottom: 20px;
+  text-align: center;
 `;
 
+// Botão de "Entrar" e Navegação
 const ButtonEnter = styled.a`
-  margin: 1% 0 0 30%;
   background-color: var(--cor-botoes);
   font-family: var(--font-texto-botao);
   font-size: 1.25rem;
-  padding: 1%;
+  padding: 10px 20px;
   text-align: center;
   text-decoration: none;
-  width: 7%;
   color: var(--cor-texto-botoes);
   border-radius: 10px;
   font-weight: bold;
@@ -47,18 +61,19 @@ const ButtonEnter = styled.a`
   }
 `;
 
+// Barra de navegação
 const Nav = styled.nav`
   display: flex;
+  gap: 20px;
+  margin-top: 10px; /* Adiciona espaço entre o título e os botões */
 `;
 
 const NavLink = styled.a`
-  margin: 0% 0% 1% 42%;
   background-color: var(--cor-botoes);
   font-family: var(--font-texto-botao);
   font-size: 1.25rem;
-  padding: 1%;
+  padding: 10px 20px;
   text-align: center;
-  width: 7%;
   text-decoration: none;
   color: var(--cor-texto-botoes);
   border-radius: 10px;
@@ -73,25 +88,53 @@ const NavLink = styled.a`
 `;
 
 const Header: React.FC = () => {
+  const pathname = usePathname();
+  const [headerTitle, setHeaderTitle] = useState('Suporte');
+
+  useEffect(() => {
+    // Atualizar o título com base na rota
+    switch (pathname) {
+      case '/Servicos':
+        setHeaderTitle('Serviços');
+        break;
+      case '/Contato':
+        setHeaderTitle('Contato');
+        break;
+      case '/Cadastro':
+        setHeaderTitle('Cadastro');
+        break;
+      default:
+        setHeaderTitle('Suporte');
+        break;
+    }
+  }, [pathname]);
+
   return (
     <HeaderWrapper>
+      {/* Logo */}
       <LogoTitle>
-        <Logo src="../public/images/assets/logo-4wheels-vermelho-branco-160px.png" alt="Logo 4Wheels" />
-        <Link href="../Cadastro" passHref>
-          <ButtonEnter>Entrar</ButtonEnter>
-        </Link>
+        <Logo src="/images/assets/logo-4wheels-vermelho-branco-160px.png" alt="Logo 4Wheels" />
       </LogoTitle>
-      <Nav>
-        <Link href="../Servicos" passHref>
-          <NavLink>Serviços</NavLink>
-        </Link>
-        <Link href="../Suporte" passHref>
-          <NavLink>Suporte</NavLink>
-        </Link>
-        <Link href="../Contato" passHref>
-          <NavLink>Contato</NavLink>
-        </Link>
-      </Nav>
+
+      {/* Título dinâmico com base na rota */}
+      <CenterWrapper>
+        <Title>{headerTitle}</Title>
+
+        {/* Navegação abaixo do título */}
+        <Nav>
+          <Link href="/Servicos" passHref>
+            <NavLink>Serviços</NavLink>
+          </Link>
+          <Link href="/Contato" passHref>
+            <NavLink>Contato</NavLink>
+          </Link>
+        </Nav>
+      </CenterWrapper>
+
+      {/* Botão Entrar à direita */}
+      <Link href="/Cadastro" passHref>
+        <ButtonEnter>Entrar</ButtonEnter>
+      </Link>
     </HeaderWrapper>
   );
 };

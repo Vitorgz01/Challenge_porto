@@ -1,23 +1,33 @@
-
 "use client";
 import React from 'react';
 import styled from 'styled-components';
 
 const FooterWrapper = styled.footer`
   background-color: var(--cor-secundaria);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+`;
+
+const FooterLinksContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px; /* Espaçamento entre os links e o texto de copyright */
 `;
 
 const FooterLink = styled.a`
-  margin: 1% 0 1% 25%;
   background-color: var(--cor-botoes);
   font-family: var(--font-texto-botao);
   font-size: 1.25rem;
-  padding: 1%;
+  padding: 10px 20px;
   text-align: center;
-  width: 15%;
   text-decoration: none;
-  border-radius: 10px;
   color: var(--cor-texto-botoes);
+  border-radius: 10px;
   font-weight: bold;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s, transform 0.3s;
@@ -29,19 +39,24 @@ const FooterLink = styled.a`
 `;
 
 const CopyRightText = styled.p`
-  margin-left: 40%;
   font-family: var(--font-titulo);
   font-size: 1.25rem;
   color: var(--cor-primaria);
+  margin-top: 10px; /* Espaçamento entre os links e o texto */
+  text-align: center;
 `;
 
 const Footer: React.FC = () => {
   return (
     <FooterWrapper>
-      <FooterLink href="../Sobre">Sobre</FooterLink>
-      <FooterLink href="../Integrantes">Integrantes</FooterLink>
-      <FooterLink href="../Privacidade">Privacidade</FooterLink>
-      <CopyRightText>© 2023 4Wheels. Todos os direitos reservados.</CopyRightText>
+      <FooterLinksContainer>
+        <FooterLink href="../Sobre">Sobre Nós</FooterLink>
+        <FooterLink href="../Integrantes">Integrantes</FooterLink>
+        <FooterLink href="../Privacidade">Política de Privacidade</FooterLink>
+      </FooterLinksContainer>
+      <CopyRightText>
+        Todos os direitos reservados © 2024 - Porto.
+      </CopyRightText>
     </FooterWrapper>
   );
 };

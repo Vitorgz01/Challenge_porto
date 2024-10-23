@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-
+import Image from "../public/images/assets/logo-4wheels.png";
 export default function CadastroPage() {
-  const [isSignUpMode, setIsSignUpMode] = useState(false);
+  const [isSignUpMode, setIsSignUpMode] = useState(false); // Estado que alterna entre login e cadastro
   const [activeBullet, setActiveBullet] = useState(1);
   const inputRefs = useRef([]);
   const textSliderRef = useRef();
 
+  // Funções para gerenciar o foco dos inputs
   const handleFocus = (index) => {
     inputRefs.current[index].classList.add("active");
   };
@@ -18,12 +19,15 @@ export default function CadastroPage() {
     }
   };
 
+  // Função para mover o slider de texto no carrossel
   const moveSlider = (index) => {
     setActiveBullet(index);
-    textSliderRef.current.style.transform = `translateY(${-(index - 1) * 2.2
-      }rem)`;
+    textSliderRef.current.style.transform = `translateY(${
+      -(index - 1) * 2.2
+    }rem)`;
   };
 
+  // Configuração do carrossel para trocar automaticamente
   useEffect(() => {
     const interval = setInterval(() => {
       moveSlider((activeBullet % 3) + 1);
@@ -36,8 +40,8 @@ export default function CadastroPage() {
       <div className="box">
         <div className="inner-box">
           <div className="forms-wrap">
-            {/* Sign-in Form */}
-            <form className="sign-in-form">
+            {/* Formulário de Login */}
+            <form className={`sign-in-form ${!isSignUpMode ? "active" : ""}`}>
               <div className="logo">
                 <img
                   src="../public/images/assets/logo-4wheels.png"
@@ -50,9 +54,13 @@ export default function CadastroPage() {
               <div className="heading">
                 <h2>Bem-vindo de volta!</h2>
                 <h6>Não registrado ainda?</h6>
-                <a onClick={() => setIsSignUpMode(true)} className="toggle">
+                <button
+                  type="button"
+                  onClick={() => setIsSignUpMode(true)}
+                  className="toggle"
+                >
                   Registrar-se
-                </a>
+                </button>
               </div>
               <div className="actual-form">
                 <div className="input-wrap">
@@ -83,10 +91,13 @@ export default function CadastroPage() {
               </div>
             </form>
 
-            {/* Sign-up Form */}
-            <form className="sign-up-form">
+            {/* Formulário de Cadastro */}
+            <form className={`sign-up-form ${isSignUpMode ? "active" : ""}`}>
               <div className="logo">
-                <img src="../public/images/assets/logo-4wheels.png" alt="4wheels" />
+                <img
+                  src="../public/images/assets/logo-4wheels.png"
+                  alt="4wheels"
+                />
                 <h4>
                   <span>4</span>wheels
                 </h4>
@@ -94,9 +105,13 @@ export default function CadastroPage() {
               <div className="heading">
                 <h2>Vamos lá!</h2>
                 <h6>Já possui uma conta?</h6>
-                <a onClick={() => setIsSignUpMode(false)} className="toggle">
+                <button
+                  type="button"
+                  onClick={() => setIsSignUpMode(false)}
+                  className="toggle"
+                >
                   Entrar
-                </a>
+                </button>
               </div>
               <div className="actual-form">
                 <div className="input-wrap">
@@ -139,7 +154,7 @@ export default function CadastroPage() {
             </form>
           </div>
 
-          {/* Carousel */}
+          {/* Carrossel */}
           <div className="carousel">
             <div className="images-wrapper">
               <img
@@ -206,6 +221,41 @@ export default function CadastroPage() {
           align-items: center;
           justify-content: center;
         }
+        .box {
+          position: relative;
+          width: 100%;
+          max-width: 1020px;
+          height: 640px;
+          background-color: #fff;
+          border-radius: 3.3rem;
+          box-shadow: 0 60px 40px -30px rgba(255, 0, 0, 0.203);
+          display: flex;
+          align-items: center; /* Alinhamento vertical interno */
+          justify-content: center; /* Alinhamento horizontal interno */
+        }
+
+        .inner-box {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: space-between; /* Mantém o espaçamento adequado entre os formulários e o carrossel */
+        }
+        .toggle {
+          color: #000;
+          text-decoration: none;
+          font-size: 0.75rem;
+          font-weight: 500;
+          transition: 0.3s;
+          cursor: pointer;
+          background: none;
+          border: none;
+          padding: 0;
+        }
+
+        .toggle:hover {
+          color: #ff0000;
+        }
 
         .box {
           position: relative;
@@ -227,12 +277,14 @@ export default function CadastroPage() {
         }
 
         .forms-wrap {
-          position: absolute;
-          height: 100%;
-          width: 45%;
+          height: 0%;
+          width: 50%;
+
           top: 0;
           left: 0;
-          display: grid;
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
           grid-template-columns: 1fr;
           grid-template-rows: 1fr;
           transition: 0.8s ease-in-out;
@@ -247,17 +299,26 @@ export default function CadastroPage() {
           display: flex;
           flex-direction: column;
           justify-content: space-evenly;
-          grid-column: 1 / 2;
-          grid-row: 1 / 2;
-          transition: opacity 0.02s 0.4s;
+          transition: opacity 0.4s ease;
         }
 
+        .sign-in-form.active {
+          opacity: 1;
+          pointer-events: all;
+        }
+
+        .sign-up-form.active {
+          opacity: 1;
+          pointer-events: all;
+        }
+
+        /* Ocultar formulários não ativos */
+        .sign-in-form,
         .sign-up-form {
           opacity: 0;
           pointer-events: none;
         }
 
-        /* Logo styling */
         .logo {
           display: flex;
           align-items: center;
@@ -292,18 +353,6 @@ export default function CadastroPage() {
           font-weight: 400;
           font-size: 0.75rem;
           display: inline;
-        }
-
-        .toggle {
-          color: #000;
-          text-decoration: none;
-          font-size: 0.75rem;
-          font-weight: 500;
-          transition: 0.3s;
-        }
-
-        .toggle:hover {
-          color: #ff0000;
         }
 
         /* Input styling */
@@ -362,15 +411,11 @@ export default function CadastroPage() {
           text-align: center;
           padding-top: 0.7rem;
           text-decoration: none;
-          -webkit-transition-duration: 0.3s;
-          -webkit-transition-property: box-shadow, transform;
-          transition-property: box-shadow, transform;
         }
 
         .botao:hover {
           background-color: #ff0000;
           box-shadow: 0 0 20px rgba(175, 175, 175, 0.5);
-          -webkit-transform: scale(1.1);
           transform: scale(1.1);
         }
 

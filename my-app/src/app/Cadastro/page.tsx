@@ -1,14 +1,15 @@
 "use client";
 
+import Image from "next/image"; // Importar o componente Image do Next.js
 import { useEffect, useRef, useState } from "react";
-import Image from "../public/images/assets/logo-4wheels.png";
+import logo from "../public/images/assets/logo-4wheels.png"; // Importação da imagem
+
 export default function CadastroPage() {
-  const [isSignUpMode, setIsSignUpMode] = useState(false); // Estado que alterna entre login e cadastro
+  const [isSignUpMode, setIsSignUpMode] = useState(false);
   const [activeBullet, setActiveBullet] = useState(1);
   const inputRefs = useRef([]);
   const textSliderRef = useRef();
 
-  // Funções para gerenciar o foco dos inputs
   const handleFocus = (index) => {
     inputRefs.current[index].classList.add("active");
   };
@@ -19,15 +20,12 @@ export default function CadastroPage() {
     }
   };
 
-  // Função para mover o slider de texto no carrossel
   const moveSlider = (index) => {
     setActiveBullet(index);
-    textSliderRef.current.style.transform = `translateY(${
-      -(index - 1) * 2.2
-    }rem)`;
+    textSliderRef.current.style.transform = `translateY(${-(index - 1) * 2.2
+      }rem)`;
   };
 
-  // Configuração do carrossel para trocar automaticamente
   useEffect(() => {
     const interval = setInterval(() => {
       moveSlider((activeBullet % 3) + 1);
@@ -43,9 +41,11 @@ export default function CadastroPage() {
             {/* Formulário de Login */}
             <form className={`sign-in-form ${!isSignUpMode ? "active" : ""}`}>
               <div className="logo">
-                <img
-                  src="../public/images/assets/logo-4wheels.png"
+                <Image
+                  src={logo}
                   alt="4wheels"
+                  width={50}
+                  height={50}
                 />
                 <h4>
                   <span>4</span>wheels
@@ -85,18 +85,20 @@ export default function CadastroPage() {
                   />
                   <label>Senha</label>
                 </div>
-                <a href="../Contato/" className="botao">
+                <button type="submit" className="botao">
                   Sign In
-                </a>
+                </button>
               </div>
             </form>
 
             {/* Formulário de Cadastro */}
             <form className={`sign-up-form ${isSignUpMode ? "active" : ""}`}>
               <div className="logo">
-                <img
-                  src="../public/images/assets/logo-4wheels.png"
+                <Image
+                  src={logo}
                   alt="4wheels"
+                  width={50}
+                  height={50}
                 />
                 <h4>
                   <span>4</span>wheels
@@ -147,9 +149,9 @@ export default function CadastroPage() {
                   />
                   <label>Senha</label>
                 </div>
-                <a href="#" className="botao">
+                <button type="submit" className="botao">
                   Sign Up
-                </a>
+                </button>
               </div>
             </form>
           </div>
@@ -197,19 +199,19 @@ export default function CadastroPage() {
 
       <style jsx>{`
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
-
+ 
         /* General reset and font styles */
         * {
           padding: 0;
           margin: 0;
           box-sizing: border-box;
         }
-
+ 
         body,
         input {
           font-family: "Poppins", sans-serif;
         }
-
+ 
         /* Main layout */
         main {
           width: 100%;
@@ -233,7 +235,7 @@ export default function CadastroPage() {
           align-items: center; /* Alinhamento vertical interno */
           justify-content: center; /* Alinhamento horizontal interno */
         }
-
+ 
         .inner-box {
           position: relative;
           width: 100%;
@@ -252,11 +254,11 @@ export default function CadastroPage() {
           border: none;
           padding: 0;
         }
-
+ 
         .toggle:hover {
           color: #ff0000;
         }
-
+ 
         .box {
           position: relative;
           width: 100%;
@@ -266,7 +268,7 @@ export default function CadastroPage() {
           border-radius: 3.3rem;
           box-shadow: 0 60px 40px -30px rgba(255, 0, 0, 0.203);
         }
-
+ 
         .inner-box {
           position: absolute;
           width: calc(100% - 4.1rem);
@@ -275,11 +277,11 @@ export default function CadastroPage() {
           left: 50%;
           transform: translate(-50%, -50%);
         }
-
+ 
         .forms-wrap {
           height: 0%;
           width: 50%;
-
+ 
           top: 0;
           left: 0;
           display: flex;
@@ -289,7 +291,7 @@ export default function CadastroPage() {
           grid-template-rows: 1fr;
           transition: 0.8s ease-in-out;
         }
-
+ 
         /* Form styling */
         form {
           max-width: 260px;
@@ -301,45 +303,45 @@ export default function CadastroPage() {
           justify-content: space-evenly;
           transition: opacity 0.4s ease;
         }
-
+ 
         .sign-in-form.active {
           opacity: 1;
           pointer-events: all;
         }
-
+ 
         .sign-up-form.active {
           opacity: 1;
           pointer-events: all;
         }
-
+ 
         /* Ocultar formulários não ativos */
         .sign-in-form,
         .sign-up-form {
           opacity: 0;
           pointer-events: none;
         }
-
+ 
         .logo {
           display: flex;
           align-items: center;
         }
-
+ 
         .logo img {
           width: 50px;
           margin-right: 0.1rem;
         }
-
+ 
         .logo h4 {
           font-size: 1.1rem;
           margin-top: -5px;
           letter-spacing: -0.5px;
           color: #ff0000;
         }
-
+ 
         .logo h4 span {
           color: #010035;
         }
-
+ 
         /* Headings */
         .heading h2 {
           font-size: 2.1rem;
@@ -347,21 +349,21 @@ export default function CadastroPage() {
           padding-bottom: 2%;
           color: #000;
         }
-
+ 
         .heading h6 {
           color: #bababa;
           font-weight: 400;
           font-size: 0.75rem;
           display: inline;
         }
-
+ 
         /* Input styling */
         .input-wrap {
           position: relative;
           height: 37px;
           margin-bottom: 2rem;
         }
-
+ 
         .input-field {
           position: absolute;
           width: 100%;
@@ -375,7 +377,7 @@ export default function CadastroPage() {
           color: #151111;
           transition: 0.4s;
         }
-
+ 
         label {
           position: absolute;
           left: 0;
@@ -386,16 +388,16 @@ export default function CadastroPage() {
           pointer-events: none;
           transition: 0.4s;
         }
-
+ 
         .input-field.active {
           border-bottom-color: #151111;
         }
-
+ 
         .input-field.active + label {
           font-size: 0.75rem;
           top: -2px;
         }
-
+ 
         /* Button styling */
         .botao {
           display: inline-block;
@@ -412,13 +414,13 @@ export default function CadastroPage() {
           padding-top: 0.7rem;
           text-decoration: none;
         }
-
+ 
         .botao:hover {
           background-color: #ff0000;
           box-shadow: 0 0 20px rgba(175, 175, 175, 0.5);
           transform: scale(1.1);
         }
-
+ 
         /* Carousel styling */
         .carousel {
           position: absolute;
@@ -434,14 +436,14 @@ export default function CadastroPage() {
           overflow: hidden;
           transition: 0.8s ease-in-out;
         }
-
+ 
         .images-wrapper {
           display: grid;
           grid-template-columns: 1fr;
           grid-template-rows: 1fr;
           visibility: hidden;
         }
-
+ 
         .image {
           width: 100%;
           grid-column: 1/2;
@@ -449,12 +451,12 @@ export default function CadastroPage() {
           opacity: 0;
           transition: opacity 0.3s, transform 0.5s;
         }
-
+ 
         .image.show {
           opacity: 1;
           transform: none;
         }
-
+ 
         /* Text slider styling */
         .text-slider {
           display: flex;
@@ -462,13 +464,13 @@ export default function CadastroPage() {
           justify-content: center;
           flex-direction: column;
         }
-
+ 
         .text-wrap {
           max-height: 2.2rem;
           overflow: hidden;
           margin-bottom: 2.5rem;
         }
-
+ 
         .text-group {
           display: flex;
           flex-direction: column;
@@ -476,20 +478,20 @@ export default function CadastroPage() {
           transform: translateY(0);
           transition: 0.5s;
         }
-
+ 
         .text-group h2 {
           line-height: 2.2rem;
           font-weight: 600;
           font-size: 1.6rem;
           color: #fff;
         }
-
+ 
         .bullets {
           display: flex;
           align-items: center;
           justify-content: center;
         }
-
+ 
         .bullets span {
           display: block;
           width: 0.5rem;
@@ -500,13 +502,13 @@ export default function CadastroPage() {
           cursor: pointer;
           transition: 0.3s;
         }
-
+ 
         .bullets span.active {
           width: 1.1rem;
           background-color: #ff0000;
           border-radius: 1rem;
         }
-
+ 
         /* Responsive styling */
         @media (max-width: 850px) {
           .box {
@@ -514,7 +516,7 @@ export default function CadastroPage() {
             max-width: 550px;
             overflow: hidden;
           }
-
+ 
           .inner-box {
             position: static;
             transform: none;
@@ -522,23 +524,23 @@ export default function CadastroPage() {
             height: revert;
             padding: 2rem;
           }
-
+ 
           .forms-wrap {
             position: revert;
             width: 100%;
             height: auto;
           }
-
+ 
           form {
             max-width: revert;
             padding: 1.5rem 2.5rem 2rem;
             transition: transform 0.8s ease-in-out, opacity 0.45s linear;
           }
-
+ 
           .heading {
             margin: 2rem 0;
           }
-
+ 
           .carousel {
             position: revert;
             height: auto;
@@ -546,42 +548,42 @@ export default function CadastroPage() {
             padding: 3rem 2rem;
             display: flex;
           }
-
+ 
           .images-wrapper {
             display: none;
           }
-
+ 
           .text-slider {
             width: 100%;
           }
         }
-
+ 
         @media (max-width: 530px) {
           main {
             padding: 1rem;
           }
-
+ 
           .box {
             border-radius: 2rem;
           }
-
+ 
           .inner-box {
             padding: 1rem;
           }
-
+ 
           .carousel {
             padding: 1.5rem 1rem;
             border-radius: 1.6rem;
           }
-
+ 
           .text-wrap {
             margin-bottom: 1rem;
           }
-
+ 
           .text-group h2 {
             font-size: 1.2rem;
           }
-
+ 
           form {
             padding: 1rem 2rem 1.5rem;
           }

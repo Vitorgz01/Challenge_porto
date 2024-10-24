@@ -27,7 +27,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      {/* Título será gerenciado dinamicamente no ClientLayout */}
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ClientLayout>{children}</ClientLayout>
       </body>
@@ -43,15 +42,17 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
   const showHeaderFooter = !noHeaderFooterRoutes.includes(pathname);
 
   useEffect(() => {
-
     switch (pathname) {
-      case '../app/Servicos':
+      case '/Servicos':
         setPageTitle('Serviços - 4Wheels');
         break;
-      case '../app/Contato':
+      case '/Contato':
         setPageTitle('Contato - 4Wheels');
         break;
-      case '../app/Cadastro':
+      case '/Cadastro':
+        setPageTitle('Cadastro - 4Wheels');
+        break;
+      case '/form':
         setPageTitle('Cadastro - 4Wheels');
         break;
       default:

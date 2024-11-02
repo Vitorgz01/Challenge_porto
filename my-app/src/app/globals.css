@@ -1,9 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --cor-texto-botoes: #ffffff;
-  --cor-botoes: #FD1645;
-  --cor-primaria: #F1F1F1;
+  --cor-botoes: #fd1645;
+  --cor-primaria: #f1f1f1;
   --cor-secundaria: #000034;
-  --cor-terciaria: #FD1645;
+  --cor-terciaria: #fd1645;
   --cor-hover-main: #9c1833;
   --cor-hover-cabecalho: #9c1833;
 
@@ -12,7 +16,7 @@
   --font-texto-botao: "Jost", sans-serif;
 }
 
-/* Adicione estilos globais adicionais, se necessário */
+/* Estilos globais adicionais */
 body {
   font-family: var(--font-texto);
   background-color: var(--cor-primaria);

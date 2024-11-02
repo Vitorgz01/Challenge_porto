@@ -1,10 +1,12 @@
 "use client";
 
-import Image from "next/image"; // Importar o componente Image do Next.js
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import logo from "../public/images/assets/logo-4wheels.png"; // Importação da imagem
+import logo from "../public/images/assets/logo-4wheels.png";
 
 export default function CadastroPage() {
+  const router = useRouter();
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const [activeBullet, setActiveBullet] = useState(1);
   const inputRefs = useRef([]);
@@ -15,16 +17,18 @@ export default function CadastroPage() {
   };
 
   const handleBlur = (index) => {
-    if (inputRefs.current[index].value === "") {
+    if (inputRefs.current[index] && inputRefs.current[index].value === "") {
       inputRefs.current[index].classList.remove("active");
     }
   };
 
   const moveSlider = (index) => {
     setActiveBullet(index);
-    textSliderRef.current.style.transform = `translateY(${
-      -(index - 1) * 2.2
-    }rem)`;
+    if (textSliderRef.current) {
+      textSliderRef.current.style.transform = `translateY(${
+        -(index - 1) * 2.2
+      }rem)`;
+    }
   };
 
   useEffect(() => {
@@ -34,13 +38,25 @@ export default function CadastroPage() {
     return () => clearInterval(interval);
   }, [activeBullet]);
 
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    router.push("/Suporte");
+  };
+
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    router.push("/Suporte");
+  };
+
   return (
     <main className={isSignUpMode ? "sign-up-mode" : ""}>
       <div className="box">
         <div className="inner-box">
           <div className="forms-wrap">
-            {/* Formulário de Login */}
-            <form className={`sign-in-form ${!isSignUpMode ? "active" : ""}`}>
+            <form
+              className={`sign-in-form ${!isSignUpMode ? "active" : ""}`}
+              onSubmit={handleSignIn}
+            >
               <div className="logo">
                 <Image src={logo} alt="4wheels" width={50} height={50} />
                 <h4>
@@ -87,8 +103,10 @@ export default function CadastroPage() {
               </div>
             </form>
 
-            {/* Formulário de Cadastro */}
-            <form className={`sign-up-form ${isSignUpMode ? "active" : ""}`}>
+            <form
+              className={`sign-up-form ${isSignUpMode ? "active" : ""}`}
+              onSubmit={handleSignUp}
+            >
               <div className="logo">
                 <Image src={logo} alt="4wheels" width={50} height={50} />
                 <h4>
@@ -147,7 +165,6 @@ export default function CadastroPage() {
             </form>
           </div>
 
-          {/* Carrossel */}
           <div className="carousel">
             <div className="images-wrapper">
               <img
@@ -191,7 +208,6 @@ export default function CadastroPage() {
       <style jsx>{`
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
 
-        /* General reset and font styles */
         * {
           padding: 0;
           margin: 0;
@@ -203,7 +219,6 @@ export default function CadastroPage() {
           font-family: "Poppins", sans-serif;
         }
 
-        /* Main layout */
         main {
           width: 100%;
           min-height: 100vh;
@@ -223,8 +238,8 @@ export default function CadastroPage() {
           border-radius: 3.3rem;
           box-shadow: 0 60px 40px -30px rgba(255, 0, 0, 0.203);
           display: flex;
-          align-items: center; /* Alinhamento vertical interno */
-          justify-content: center; /* Alinhamento horizontal interno */
+          align-items: center;
+          justify-content: center;
         }
 
         .inner-box {
@@ -232,7 +247,7 @@ export default function CadastroPage() {
           width: 100%;
           height: 100%;
           display: flex;
-          justify-content: space-between; /* Mantém o espaçamento adequado entre os formulários e o carrossel */
+          justify-content: space-between;
         }
         .toggle {
           color: #000;
@@ -272,7 +287,6 @@ export default function CadastroPage() {
         .forms-wrap {
           height: 0%;
           width: 50%;
-
           top: 0;
           left: 0;
           display: flex;
@@ -283,7 +297,6 @@ export default function CadastroPage() {
           transition: 0.8s ease-in-out;
         }
 
-        /* Form styling */
         form {
           max-width: 260px;
           width: 100%;
@@ -305,7 +318,6 @@ export default function CadastroPage() {
           pointer-events: all;
         }
 
-        /* Ocultar formulários não ativos */
         .sign-in-form,
         .sign-up-form {
           opacity: 0;
@@ -333,7 +345,6 @@ export default function CadastroPage() {
           color: #010035;
         }
 
-        /* Headings */
         .heading h2 {
           font-size: 2.1rem;
           font-weight: 600;
@@ -348,7 +359,6 @@ export default function CadastroPage() {
           display: inline;
         }
 
-        /* Input styling */
         .input-wrap {
           position: relative;
           height: 37px;
@@ -389,7 +399,6 @@ export default function CadastroPage() {
           top: -2px;
         }
 
-        /* Button styling */
         .botao {
           display: inline-block;
           width: 100%;
@@ -412,7 +421,6 @@ export default function CadastroPage() {
           transform: scale(1.1);
         }
 
-        /* Carousel styling */
         .carousel {
           position: absolute;
           height: 100%;
@@ -448,7 +456,6 @@ export default function CadastroPage() {
           transform: none;
         }
 
-        /* Text slider styling */
         .text-slider {
           display: flex;
           align-items: center;
@@ -500,7 +507,6 @@ export default function CadastroPage() {
           border-radius: 1rem;
         }
 
-        /* Responsive styling */
         @media (max-width: 850px) {
           .box {
             height: auto;

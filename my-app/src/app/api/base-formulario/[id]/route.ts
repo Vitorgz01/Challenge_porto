@@ -1,8 +1,8 @@
-// src/app/api/base-produtos/[id]/route.ts
 import { Produto } from "@/app/types";
 import { promises as fs } from "fs";
 import { NextResponse } from "next/server";
 
+// Atualizando o caminho do arquivo para refletir a mudança de nome
 const filePath = process.cwd() + '/src/app/data/base.json';
 
 async function readFile() {

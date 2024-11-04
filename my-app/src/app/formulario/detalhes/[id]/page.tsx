@@ -92,7 +92,7 @@ export default function Produto({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     const fetchProduto = async () => {
-      const response = await fetch(`/api/base-produtos/${id}`);
+      const response = await fetch(`/api/base-formulario/${id}`);
       if (response.ok) {
         const data = await response.json();
         setProduto(data);
@@ -116,10 +116,10 @@ export default function Produto({ params }: { params: { id: string } }) {
       body: JSON.stringify(produto),
     };
     try {
-      const response = await fetch(`/api/base-produtos/${id}`, cabecalho);
+      const response = await fetch(`/api/base-formulario/${id}`, cabecalho);
       if (response.ok) {
         alert("Produto atualizado com sucesso!");
-        navigate.push("/produtos");
+        navigate.push("/formulario");
       } else {
         alert("Erro ao atualizar produto!");
       }

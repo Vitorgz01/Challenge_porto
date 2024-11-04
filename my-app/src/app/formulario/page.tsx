@@ -126,7 +126,7 @@ export default function GerenciamentoProdutos() {
       body: JSON.stringify(produto),
     };
     try {
-      const response = await fetch("/api/base-produtos", cabecalho);
+      const response = await fetch("/api/base-formulario", cabecalho);
       if (response.ok) {
         alert(`Pessoa cadastrada com sucesso!`);
         setProduto({
@@ -162,7 +162,7 @@ export default function GerenciamentoProdutos() {
   const [lista, setLista] = useState([]);
   const fetchLista = async () => {
     try {
-      const response = await fetch("/api/base-produtos");
+      const response = await fetch("/api/base-formulario");
       const data = await response.json();
       setLista(data);
     } catch (error) {
@@ -176,7 +176,7 @@ export default function GerenciamentoProdutos() {
 
   const handleDelete = async (id: number) => {
     try {
-      const response = await fetch(`/api/base-produtos/${id}`, {
+      const response = await fetch(`/api/base-formulario/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -270,7 +270,7 @@ export default function GerenciamentoProdutos() {
                 )
               )}
               <ActionContainer>
-                <Link href={`/produtos/produto/${p.id}`} passHref>
+                <Link href={`/formulario/detalhes/${p.id}`} passHref>
                   <ActionButton>
                     <FaFileInvoice />
                   </ActionButton>

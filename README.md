@@ -4,9 +4,9 @@
 Uma breve descrição sobre o que esse projeto faz e para quem ele é
 
 ## Integrantes:
-- Vitor Ginza - RM: 554849 -Turma: 1TDSPI - 2024 - Github: github.com/Vitorgz01
-
-- Gabriel Gomes - RM: 555427 - Turma: 1TDSPI - 2024 - Github: github.com/GomesMancera
+- Vitor Ginza - RM: 554849 -Turma: 1TDSPI - 2024 
+- Victor Hugo Carvalho Pereira RM:558550   Turma: 1TDSPI - 2024
+- Gabriel Gomes - RM: 555427 - Turma: 1TDSPI - 2024 
 
 
 # Tecnologias utilizadas

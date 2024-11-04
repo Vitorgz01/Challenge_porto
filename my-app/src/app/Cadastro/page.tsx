@@ -40,12 +40,12 @@ export default function CadastroPage() {
 
   const handleSignIn = (e) => {
     e.preventDefault();
-    router.push("/Suporte");
+    router.push("/Servicos");
   };
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    router.push("/Suporte");
+    router.push("/Servicos");
   };
 
   return (

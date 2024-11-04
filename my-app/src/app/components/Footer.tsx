@@ -1,6 +1,7 @@
 "use client";
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+import Link from "next/link"; // Importa o Link do Next.js
 
 const FooterWrapper = styled.footer`
   background-color: var(--cor-secundaria);
@@ -50,9 +51,15 @@ const Footer: React.FC = () => {
   return (
     <FooterWrapper>
       <FooterLinksContainer>
-        <FooterLink href="../Sobre">Sobre Nós</FooterLink>
-        <FooterLink href="../Integrantes">Integrantes</FooterLink>
-        <FooterLink href="../Privacidade">Política de Privacidade</FooterLink>
+        <Link href="/Sobre" passHref legacyBehavior>
+          <FooterLink>Sobre Nós</FooterLink>
+        </Link>
+        <Link href="/Integrantes" passHref legacyBehavior>
+          <FooterLink>Integrantes</FooterLink>
+        </Link>
+        <Link href="/Privacidade" passHref legacyBehavior>
+          <FooterLink>Política de Privacidade</FooterLink>
+        </Link>
       </FooterLinksContainer>
       <CopyRightText>
         Todos os direitos reservados © 2024 - Porto.
